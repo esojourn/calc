@@ -141,8 +141,13 @@ function work()
       width: 150px;
     }
 
+    table.pure-table tr > th {
+      width: 50%;
+    }
+
+
     @media (max-width: 767px) {
-      .pure-form input[type=text] {
+      .pure-form input[type=number] {
         display: inline-block;
       }
 
@@ -217,12 +222,12 @@ function work()
       <fieldset>
         <div class="pure-control-group">
           <label>配速</label>
-          <input type="text" size="8" class="pace" name="pace" placeholder="Pace"
+          <input type="number" size="8" class="pace" name="pace" placeholder="Pace"
                  value="<?php echo $pace_str; ?>">
           <span class="pure-form-message-inline">格式: 630, 500 ...</span></div>
         <div class="pure-control-group">
           <label>km/h</label>
-          <input type="text" size="8" class="kmh" name="kmh" placeholder="km/h"
+          <input type="number" size="8" class="kmh" name="kmh" placeholder="km/h"
                  value="<?php echo $kmh_str; ?>">
           <span class="pure-form-message-inline">格式: 12.3, 13 ...</span></div>
         <div class="pure-control-group">
