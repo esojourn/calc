@@ -145,7 +145,6 @@ function work()
       width: 50%;
     }
 
-
     @media (max-width: 767px) {
       .pure-form input[type=number] {
         display: inline-block;
@@ -320,15 +319,10 @@ function work()
       }
       echo "</tbody></table>";
 
-
-      echo "</div>";
-
-      echo "<div class='table pure-u-1-2'>";
-
       echo "</div></div>";
 
 
-      echo "</div>";
+      // echo "</div>";
 
     } else {
 
@@ -339,18 +333,12 @@ function work()
       <a href="https://github.com/esojourn/calc">源代码</a> - 
       <a href="https://dingxuan.info/calc">跑步配速转换</a><br>
       <a href="https://dingxuan.info">dingxuan.info</a></div>';
+    //echo $msg; //21.0975, 42.195
+    /*      echo 'Pace value: ' . $pace_str . '<br>';
+          echo 'KMH value: ' . $kmh_str . '<br>';
+          echo 'WHO: ' . $who . '<br>';*/
+
     ?>
-    <div class="table">
-
-
-      <?php
-      //echo $msg; //21.0975, 42.195
-      /*      echo 'Pace value: ' . $pace_str . '<br>';
-            echo 'KMH value: ' . $kmh_str . '<br>';
-            echo 'WHO: ' . $who . '<br>';*/
-
-      ?>
-    </div>
   </div>
 </div>
 </body>
