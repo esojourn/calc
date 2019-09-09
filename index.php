@@ -208,7 +208,7 @@ function work()
 <body>
 <div class="content">
   <div class="content-inner">
-    <h1>跑步配速 - 跑步机速度 换算</h1>
+    <h1>跑步机速度 - 配速 换算计算器</h1>
     <?php
     if ($msg <> '') {
       echo '<div class="error">';
@@ -227,7 +227,7 @@ function work()
         <div class="pure-control-group">
           <label>km/h</label>
           <input type="number" size="8" class="kmh" name="kmh" placeholder="km/h"
-                 value="<?php echo $kmh_str; ?>">
+                 value="<?php echo $kmh_str; ?>" step=".1">
           <span class="pure-form-message-inline">格式: 12.3, 13 ...</span></div>
         <div class="pure-control-group">
           <input type="hidden" name="who">
@@ -331,7 +331,7 @@ function work()
       自己写了一个。欢迎跑友测试。<br><br>
       <a href="https://github.com/esojourn/calc/issues">bug反馈</a> - 
       <a href="https://github.com/esojourn/calc">源代码</a> - 
-      <a href="https://dingxuan.info/calc">跑步配速转换</a><br>
+      <a href="https://dingxuan.info/calc">跑步机配速转换</a><br>
       <a href="https://dingxuan.info">dingxuan.info</a></div>';
     //echo $msg; //21.0975, 42.195
     /*      echo 'Pace value: ' . $pace_str . '<br>';
