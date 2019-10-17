@@ -61,7 +61,7 @@ function work()
   if ($who == 'pace') {
     $sec = (int)substr($pace, -2);
     $min = (int)substr($pace, 0, strlen($pace) - 2);
-    $kmh_str = strval(round(1 / ($min * 60 + $sec) * 3600, 2));
+    $kmh_str = strval(round(1 / ($min * 60 + $sec) * 3600, 1));
 
 
   } elseif ($who == 'kmh') {
