@@ -124,21 +124,21 @@ function work()
 
     /* 暗黑模式 */
     [data-theme="dark"] {
-      --bg-color: #1a1a2e;
-      --bg-secondary: #16213e;
+      --bg-color: #0d1a14;
+      --bg-secondary: #142820;
       --text-color: #eaeaea;
-      --text-secondary: #b0b0b0;
-      --border-color: #444444;
-      --input-bg: #0f3460;
+      --text-secondary: #a8c4b0;
+      --border-color: #2d4a3a;
+      --input-bg: #1a3528;
       --active-bg: #5dd863;
-      --active-text: #1a1a2e;
-      --result-bg: #16213e;
+      --active-text: #0d1a14;
+      --result-bg: #142820;
       --result-text: #5dd863;
       --button-primary-bg: #5dd863;
-      --button-primary-text: #1a1a2e;
-      --table-odd-bg: #1f2a4a;
+      --button-primary-text: #0d1a14;
+      --table-odd-bg: #162920;
       --error-color: #ff6b6b;
-      --lang-bg: #0f3460;
+      --lang-bg: #1a3528;
       --link-color: #5dd863;
     }
 
@@ -330,12 +330,12 @@ function work()
     }
 
     /* 亮色模式：显示月亮图标（点击切换到暗色） */
-    .icon-moon { display: none; }
-    .icon-sun { display: block; }
+    .icon-moon { display: block; }
+    .icon-sun { display: none; }
 
     /* 暗色模式：显示太阳图标（点击切换到亮色） */
-    [data-theme="dark"] .icon-moon { display: block; }
-    [data-theme="dark"] .icon-sun { display: none; }
+    [data-theme="dark"] .icon-moon { display: none; }
+    [data-theme="dark"] .icon-sun { display: block; }
 
     /* 表格暗黑模式适配 */
     .pure-table {
