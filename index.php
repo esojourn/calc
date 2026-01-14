@@ -495,14 +495,6 @@ function work()
 </head>
 <body>
 <div class="content">
-  <div class="lang-selector">
-    <select id="langSelect" onchange="location.href='?lang='+this.value;">
-      <option value="zh" <?php echo $currentLang == 'zh' ? 'selected' : ''; ?>>简体中文</option>
-      <option value="zh-TW" <?php echo $currentLang == 'zh-TW' ? 'selected' : ''; ?>>繁體中文</option>
-      <option value="en" <?php echo $currentLang == 'en' ? 'selected' : ''; ?>>English</option>
-      <option value="de" <?php echo $currentLang == 'de' ? 'selected' : ''; ?>>Deutsch</option>
-    </select>
-  </div>
   <div class="content-inner">
     <h1><?php echo t('main_heading'); ?></h1>
     <?php
@@ -649,6 +641,14 @@ function work()
           echo 'WHO: ' . $who . '<br>';*/
 
     ?>
+  </div>
+  <div class="lang-selector">
+    <select id="langSelect" onchange="location.href='?lang='+this.value;">
+      <option value="zh" <?php echo $currentLang == 'zh' ? 'selected' : ''; ?>>简体中文</option>
+      <option value="zh-TW" <?php echo $currentLang == 'zh-TW' ? 'selected' : ''; ?>>繁體中文</option>
+      <option value="en" <?php echo $currentLang == 'en' ? 'selected' : ''; ?>>English</option>
+      <option value="de" <?php echo $currentLang == 'de' ? 'selected' : ''; ?>>Deutsch</option>
+    </select>
   </div>
 </div>
 <!-- 主题切换按钮 -->
