@@ -1,4 +1,6 @@
 <?php
+require_once 'lang/i18n.php';
+
 $pace_str = '';
 $kmh_str = '';
 $error = FALSE;
@@ -16,25 +18,25 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     if (is_numeric($kmh)) {
       if (intval($kmh) <= 6) {
         $error = TRUE;
-        $msg .= "爬的太慢，不管算<br>\n";
+        $msg .= t('error_too_slow') . "<br>\n";
       } elseif (intval($kmh) > 25) {
         $error = TRUE;
-        $msg .= "飞得太快，算不过来<br>\n";
+        $msg .= t('error_too_fast') . "<br>\n";
       }
     } else {
       $error = TRUE;
-      $msg .= "km/h要填数字，要不没法算<br>\n";
+      $msg .= t('error_kmh_not_number') . "<br>\n";
     }
   } elseif ($who == 'pace') { //
     if (is_numeric($pace)) {
       if (intval($pace) <= 200 || intval($pace) >= 999) {
         $error = TRUE;
-        $msg .= "别逗我，配速不合常识~<br>\n";
+        $msg .= t('error_pace_invalid') . "<br>\n";
       }
 
     } else {
       $error = TRUE;
-      $msg .= "配速你填" . $pace . "，打算让我怎么算？<br>\n";
+      $msg .= sprintf(t('error_pace_not_number'), $pace) . "<br>\n";
     }
   }
   work();
@@ -90,7 +92,7 @@ function work()
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>速度转换工具 | 跑步配速与跑步机速度互换</title>
+  <title><?php echo t('page_title'); ?></title>
   <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css"
         integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
   <!--[if lte IE 8]>
@@ -156,6 +158,30 @@ function work()
       }
     }
 
+    .lang-selector {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+
+    .lang-selector select {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #fff;
+      font-size: 14px;
+    }
+
+    @media (max-width: 767px) {
+      .lang-selector {
+        position: static;
+        text-align: center;
+        margin: 10px 0;
+      }
+    }
+
   </style>
   <script src="jquery-3.4.1.min.js"></script>
   <script>
@@ -207,8 +233,16 @@ function work()
 </head>
 <body>
 <div class="content">
+  <div class="lang-selector">
+    <select id="langSelect" onchange="location.href='?lang='+this.value;">
+      <option value="zh" <?php echo $currentLang == 'zh' ? 'selected' : ''; ?>>简体中文</option>
+      <option value="zh-TW" <?php echo $currentLang == 'zh-TW' ? 'selected' : ''; ?>>繁體中文</option>
+      <option value="en" <?php echo $currentLang == 'en' ? 'selected' : ''; ?>>English</option>
+      <option value="de" <?php echo $currentLang == 'de' ? 'selected' : ''; ?>>Deutsch</option>
+    </select>
+  </div>
   <div class="content-inner">
-    <h1>跑步机速度 - 配速 换算计算器</h1>
+    <h1><?php echo t('main_heading'); ?></h1>
     <?php
     if ($msg <> '') {
       echo '<div class="error">';
@@ -220,36 +254,36 @@ function work()
           class="pure-form pure-form-aligned">
       <fieldset>
         <div class="pure-control-group">
-          <label>配速</label>
-          <input type="number" size="8" class="pace" name="pace" placeholder="Pace"
+          <label><?php echo t('label_pace'); ?></label>
+          <input type="number" size="8" class="pace" name="pace" placeholder="<?php echo t('placeholder_pace'); ?>"
                  value="<?php echo $pace_str; ?>">
-          <span class="pure-form-message-inline">格式: 630, 500 ...</span></div>
+          <span class="pure-form-message-inline"><?php echo t('hint_pace'); ?></span></div>
         <div class="pure-control-group">
-          <label>km/h</label>
-          <input type="number" size="8" class="kmh" name="kmh" placeholder="km/h"
+          <label><?php echo t('label_kmh'); ?></label>
+          <input type="number" size="8" class="kmh" name="kmh" placeholder="<?php echo t('placeholder_kmh'); ?>"
                  value="<?php echo $kmh_str; ?>" step=".1">
-          <span class="pure-form-message-inline">格式: 12.3, 13 ...</span></div>
+          <span class="pure-form-message-inline"><?php echo t('hint_kmh'); ?></span></div>
         <div class="pure-control-group">
           <input type="hidden" name="who">
-          <input type="submit" class="pure-button pure-button-primary">
+          <input type="submit" class="pure-button pure-button-primary" value="<?php echo t('button_submit'); ?>">
         </div>
         <div class="pure-control-group">
-          <input type="reset" class="pure-button"></div>
+          <input type="reset" class="pure-button" value="<?php echo t('button_reset'); ?>"></div>
       </fieldset>
     </form>
     <?php
     if (!$error && $_SERVER["REQUEST_METHOD"] == 'POST') {
 
       $distance = array(
-        '0.1' => '100m',
-        '0.2' => '200m',
-        '0.4' => '400m',
-        '0.8' => '800m',
-        '1' => '1KM',
-        '5' => '5KM',
-        '10' => '10KM',
-        '21.0975' => '半马',
-        '42.195' => '全马',
+        '0.1' => t('distance_100m'),
+        '0.2' => t('distance_200m'),
+        '0.4' => t('distance_400m'),
+        '0.8' => t('distance_800m'),
+        '1' => t('distance_1km'),
+        '5' => t('distance_5km'),
+        '10' => t('distance_10km'),
+        '21.0975' => t('distance_half_marathon'),
+        '42.195' => t('distance_full_marathon'),
       );
       $time = array(
         1,
@@ -263,13 +297,13 @@ function work()
         120,
       );
 
-      echo '<h2>在此速度下</h2>';
+      echo '<h2>' . t('table_heading') . '</h2>';
       echo "<div class=\"pure-g\"><div class='table pure-u-1'>";
       echo "<table class=\"pure-table\">
     <thead>
         <tr>
-            <th>距离</th>
-            <th>时:分:秒</th>
+            <th>" . t('table_header_distance') . "</th>
+            <th>" . t('table_header_time') . "</th>
         </tr>
     </thead><tbody>
       ";
@@ -298,8 +332,8 @@ function work()
       echo "<table class=\"pure-table\">
     <thead>
         <tr>
-            <th>时间</th>
-            <th>距离</th>
+            <th>" . t('table_header_duration') . "</th>
+            <th>" . t('table_header_distance') . "</th>
         </tr>
     </thead><tbody>
       ";
@@ -313,9 +347,9 @@ function work()
           //even
           echo "<tr>";
         }
-        echo '<td>' . $value . '分</td>';
+        echo '<td>' . sprintf(t('time_minutes'), $value) . '</td>';
         $time_ori = round($value / 60 * floatval($kmh_str) * 1000, 0);
-        echo '<td>' . $time_ori . '米</td></tr>';
+        echo '<td>' . sprintf(t('distance_meters'), $time_ori) . '</td></tr>';
       }
       echo "</tbody></table>";
 
@@ -327,11 +361,10 @@ function work()
     } else {
 
     }
-    echo '网上搜索到的配速转换器都觉得不好用。<br>
-      自己写了一个。欢迎跑友测试。<br><br>
-      <a href="https://github.com/esojourn/calc/issues">bug反馈</a> - 
-      <a href="https://github.com/esojourn/calc">源代码</a> - 
-      <a href="https://dingxuan.info/calc">跑步机配速转换</a><br>
+    echo t('footer_text') . '<br><br>
+      <a href="https://github.com/esojourn/calc/issues">' . t('footer_bug_report') . '</a> -
+      <a href="https://github.com/esojourn/calc">' . t('footer_source_code') . '</a> -
+      <a href="https://dingxuan.info/calc">' . t('footer_tool_link') . '</a><br>
       <a href="https://dingxuan.info">dingxuan.info</a></div>';
     //echo $msg; //21.0975, 42.195
     /*      echo 'Pace value: ' . $pace_str . '<br>';
